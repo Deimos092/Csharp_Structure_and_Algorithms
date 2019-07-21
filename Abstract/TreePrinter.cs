@@ -13,6 +13,7 @@ namespace Algorytms.Abstract
             public TNode Node;
             public string Text;
             public int StartPos;
+			public TNode.Color Color;
             public int Size { get { return Text.Length; } }
             public int EndPos { get { return StartPos + Size; } set { StartPos = value - Size; } }
             public NodeInfo Parent, Left, Right;
@@ -23,10 +24,17 @@ namespace Algorytms.Abstract
             if (root == null) return;
             int rootTop = Console.CursorTop + topMargin;
             var last = new List<NodeInfo>();
+
             var next = root;
             for (int level = 0; next != null; level++)
             {
-                var item = new NodeInfo { Node = next, Text = next.Data.ToString(" 0 ") };
+				var item = new NodeInfo
+				{
+					Node = next,
+					Text = next.Data.ToString(" 0 "),
+					Color = root.Colors
+				};
+
                 if (level < last.Count)
                 {
                     item.StartPos = last[level].EndPos + 1;
@@ -75,10 +83,10 @@ namespace Algorytms.Abstract
 
         private static void Print(NodeInfo item, int top)
         {
-            SwapColors();
-            Print(item.Text, top, item.StartPos);
-            SwapColors();
-            if (item.Left != null)
+            SwapColors(item);
+			Print(item.Text, top, item.StartPos);
+			Console.ResetColor();
+			if (item.Left != null)
                 PrintLink(top + 1, "┌", "┘", item.Left.StartPos + item.Left.Size / 2, item.StartPos);
             if (item.Right != null)
                 PrintLink(top + 1, "└", "┐", item.EndPos - 1, item.Right.StartPos + item.Right.Size / 2);
@@ -98,11 +106,24 @@ namespace Algorytms.Abstract
             while (Console.CursorLeft < right) Console.Write(s);
         }
 
-        private static void SwapColors()
-        {
-            var color = Console.ForegroundColor;
-            Console.ForegroundColor = Console.BackgroundColor;
-            Console.BackgroundColor = color;
-        }
-    }
+		private static void SwapColors(NodeInfo nodeInfo)
+		{
+			if (nodeInfo.Color == TNode.Color.Black)
+			{
+				Console.ForegroundColor = ConsoleColor.White;
+				Console.BackgroundColor = ConsoleColor.DarkGray;
+			}
+			else if (nodeInfo.Color == TNode.Color.Red)
+			{
+				Console.ForegroundColor = ConsoleColor.Black;
+				Console.BackgroundColor = ConsoleColor.Red;
+			}
+			else
+			{
+				var color = Console.ForegroundColor;
+				Console.ForegroundColor = Console.BackgroundColor;
+				Console.BackgroundColor = color;
+			}
+		}
+	}
 }

@@ -19,15 +19,17 @@ namespace Algorytms.Trees
 			_root = new TNode(data);
 		}
 		
-		public void Inser(int data)
+		public virtual void Inser(int data)
 		{
 			TNode node = new TNode(data);
 			if(_root == null)
 			{
 				_root = node;
+				_root.Colors = TNode.Color.None;
 			}
 			else
 			{
+				_root.Colors = TNode.Color.None;
 				_root = RecursiveInsert(_root, node);
 			}
 		}
@@ -80,12 +82,12 @@ namespace Algorytms.Trees
 			return current;
 		}
 
-		private int max(int left, int right)
+		internal int max(int left, int right)
 		{
 			return Math.Max(left, right);
 		}
 
-		private int getHeight(TNode current)
+		internal int getHeight(TNode current)
 		{
 			int height = 0;
 			if (current != null)
@@ -98,34 +100,34 @@ namespace Algorytms.Trees
 			return height;
 		}
 
-		private int balance_factor(TNode current)
+		internal int balance_factor(TNode current)
 		{
 			int l = getHeight(current.Left);
 			int r = getHeight(current.Right);
 			int b_factor = l - r;
 			return b_factor;
 		}
-		private TNode RotateLL(TNode parent)
+		internal TNode RotateLL(TNode parent)
 		{
 			TNode child = parent.Left;
 			parent.Left = child.Right;
 			child.Right = parent;
 			return child;
 		}
-		private TNode RotateLR(TNode parent)
+		internal TNode RotateLR(TNode parent)
 		{
 			TNode child = parent.Left;
 			parent.Left = RotateRR(child);
 			return RotateLL(parent);
 		}
-		private TNode RotateRR(TNode parent)
+		internal TNode RotateRR(TNode parent)
 		{
 			TNode child = parent.Right;
 			parent.Right = child.Left;
 			child.Left = parent;
 			return child;
 		}
-		private TNode RotateRL(TNode parent)
+		internal TNode RotateRL(TNode parent)
 		{
 			TNode child = parent.Right;
 			parent.Right = RotateLL(child);

@@ -15,12 +15,12 @@ namespace Algorytms
 		public static void CreateList()
         {
             Random random = new Random();
-			LinkedListDouble<int> myList = new LinkedListDouble<int>();
+			RedBlackTree myList = new RedBlackTree();
 
 			for (int i = 0; i < CountItems; i++)
-				myList.AddFirst(i);
+				myList.Inser(i);
 
-			Console.WriteLine(myList.ToString());
+			myList.ConsolePrint();
 		}
 
         static void Main(string[] args)

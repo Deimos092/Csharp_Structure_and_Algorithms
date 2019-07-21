@@ -2,9 +2,15 @@
 {
     public class TNode
     {
-        private int data;
-        private TNode left, right;
-
+		public enum Color
+		{
+			Red,
+			Black,
+			None
+		}
+        private int _data;
+		private TNode _left, _right, _parent;
+		private Color _color;
         public TNode(int data)
         {
             Data = data;
@@ -14,32 +20,36 @@
 
         public int Data
         {
-            get => data;
+            get => _data;
             set
             {
                 if (value.GetType() == typeof(int))
-                    data = value;
+					_data = value;
             }
         }
+		public TNode Parent
+		{
+			get => _parent;
+			set => _parent = value;
+		}
 
         public TNode Left
-        {
-            get => left;
-            set
-            {
-                left = value;
-            }
-        }
+		{
+			get => _left;
+			set => _left = value;
+		}
 
-        public TNode Right
-        {
-            get => right;
-            set
-            {
-                right = value;
-            }
-        }
-     
+		public TNode Right
+		{
+			get => _right;
+			set => _right = value;
+		}
+
+		public Color Colors
+		{
+			get => _color;
+			set => _color = value;
+		}
         public void Insertdata(ref TNode node, int data)
         {
             if (node == null)
@@ -48,11 +58,11 @@
             }
             else if (data < node.Data)
             {
-                Insertdata(ref node.left, data);
+                Insertdata(ref node._left, data);
             }
             else
             {
-                Insertdata(ref node.right, data);
+                Insertdata(ref node._right, data);
             }
         }
 

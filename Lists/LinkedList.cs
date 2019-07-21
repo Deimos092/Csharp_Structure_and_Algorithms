@@ -31,24 +31,24 @@ namespace Algorytms.Lists
             Count++;
         }
 		/// <summary>
-		/// Удалить данные из связного списка.
-		/// Выполняется удаление первого вхождения данных.
+		/// Remove data from linked list.
+		/// Execute removing first data in.
 		/// </summary>
-		/// <param name="data"> Данные, которые будут удалены. </param>
+		/// <param name="data"> The data woud be delete </param>
 		public void Remove(T data)
         {
-            // Не забываем проверять входные аргументы на null.
+            // Dont foget to chek on null.
             if (data == null)
             {
                 throw new ArgumentNullException(nameof(data));
             }
-            // Текущий обозреваемый элемент списка.
+            // Current observe node element.
             Node<T> Current = Head;
-            // Предыдущий элемент списка, перед обозреваемым.
+            // Previouse elemet before removing element.
             Node<T> Previous = null;
 
-			// Выполняем переход по всех элементам списка до его завершения,
-			// или пока не будет найден элемент, который необходимо удалить.
+			// Walk all elements in linkedlist to end of it,
+			// or while not found current elemnt with data.
 			while (Current != null)
             {
                 // Если данные обозреваемого элемента совпадают с удаляемыми данными,
