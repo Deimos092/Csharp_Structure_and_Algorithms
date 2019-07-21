@@ -8,11 +8,13 @@ namespace Algorytms.Trees
         public BinarySearchTree()
         {
             root = null;
+			root.Colors = TNode.Color.None;
         }
 
         public BinarySearchTree(int data)
         {
             root = new TNode(data);
+			root.Colors = TNode.Color.None;
         }
 
         public int Count { get; private set; }
