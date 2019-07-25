@@ -2,15 +2,22 @@
 {
     public class TNode
     {
+		//Enumerable Color for Red Black Tree
 		public enum Color
 		{
 			Red,
 			Black,
 			None
 		}
+		//------------------- Private Field ---------------------
         private int _data;
 		private TNode _left, _right, _parent;
-		private Color _color;
+		//-------------------------------------------------------
+
+		/// <summary>
+		/// Constructor for init Data, Left, Right fields
+		/// </summary>
+		/// <param name="data">data field</param>
         public TNode(int data)
         {
             Data = data;
@@ -44,12 +51,13 @@
 			get => _right;
 			set => _right = value;
 		}
+		public Color Colors	{ get; set;	}
 
-		public Color Colors
-		{
-			get => _color;
-			set => _color = value;
-		}
+		/// <summary>
+		/// Reqursion inserting Node like BST tree method
+		/// </summary>
+		/// <param name="node">Curent node</param>
+		/// <param name="data">Data value</param>
         public void Insertdata(ref TNode node, int data)
         {
             if (node == null)
@@ -66,7 +74,13 @@
             }
         }
 
-        public bool Search(TNode node, int data)
+		/// <summary>
+		/// Find Data from tree 
+		/// </summary>
+		/// <param name="node">Current Node</param>
+		/// <param name="data">Target data</param>
+		/// <returns> Boolean result </returns>
+        public bool Find(TNode node, int data)
         {
             if (node == null)
                 return false;
@@ -77,11 +91,11 @@
             }
             else if (node.Data < data)
             {
-                return Search(node.Right, data);
+                return Find(node.Right, data);
             }
             else if (node.Data > data)
             {
-                return Search(node.Left, data);
+                return Find(node.Left, data);
             }
 
             return false;

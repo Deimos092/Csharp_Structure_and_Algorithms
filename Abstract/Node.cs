@@ -4,6 +4,7 @@ namespace Algorytms.Abstract
 {
 	public class Node<T>
 	{
+
 		private T _data;//приватное поле данных
 
 		public Node() { }//стандартный конструктор без параметров

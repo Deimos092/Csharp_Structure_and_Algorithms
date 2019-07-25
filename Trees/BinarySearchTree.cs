@@ -37,7 +37,7 @@ namespace Algorytms.Trees
 
         public bool Search(int data)
         {
-            return root.Search(root, data);
+            return root.Find(root, data);
         }
 
         public void ConsolePrint()

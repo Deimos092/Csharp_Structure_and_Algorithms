@@ -16,6 +16,10 @@ namespace Algorytms.Lists
 			AddFirst(data);
 		}
 
+		/// <summary>
+		/// Add new node to Head of List
+		/// </summary>
+		/// <param name="data">Data value</param>
 		public void AddFirst(T data)
 		{
 			Node<T> newNode = new Node<T>(data);
@@ -30,6 +34,11 @@ namespace Algorytms.Lists
 			Head = newNode;
 			Count++;
 		}
+
+		/// <summary>
+		/// Add new node to back of List
+		/// </summary>
+		/// <param name="data">Data value</param>
 		public void AddLast(T data)
 		{
 			Node<T> newNode = new Node<T>(data);
@@ -45,6 +54,12 @@ namespace Algorytms.Lists
 			Count++;
 
 		}
+
+		/// <summary>
+		/// Add new node after Target node of List
+		/// </summary>
+		/// <param name="node">Target node</param>
+		/// <param name="data">Data value</param>
 		public void AddAfter(Node<T> node, T data)
 		{
 			if (node == null) throw new NullReferenceException();
@@ -68,6 +83,11 @@ namespace Algorytms.Lists
 			return temp;
 		}
 
+
+		/// <summary>
+		/// Find and delete node with current data
+		/// </summary>
+		/// <param name="data">data value</param>
 		public void Remove(T data)
 		{
 			Node<T> temp = Head;
@@ -94,6 +114,16 @@ namespace Algorytms.Lists
 				temp.Previous.Next = temp.Next;
 			}
 			Count--;
+		}
+
+		public override void Clear()
+		{
+			base.Clear();
+		}
+
+		public override string ToString()
+		{
+			return base.ToString();
 		}
 	}
 }

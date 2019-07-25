@@ -5,10 +5,16 @@ namespace Algorytms.Lists
 {
     public class LinkedListStack<T> : AbstractList<T>
     {
-
-        public LinkedListStack() : base()
+		/// <summary>
+		/// Init empty Constructor 
+		/// </summary>
+		public LinkedListStack() : base()
         { }
 
+		/// <summary>
+		/// Add new node with data to Head of Stack
+		/// </summary>
+		/// <param name="data">data value</param>
         public void Push(T data)
         {
             var Node = new Node<T>(data);
@@ -17,6 +23,10 @@ namespace Algorytms.Lists
             Count++;
         }
 
+		/// <summary>
+		/// Remove Firs Node from Head of Stack 
+		/// </summary>
+		/// <returns>Node of data</returns>
         public T Pop()
         {
             var Popitem = Head;
@@ -25,7 +35,11 @@ namespace Algorytms.Lists
             return Popitem.Data;
         }
 
-        public T Peek()
+		/// <summary>
+		/// Show first Node in Stack List or return NullReferenceException
+		/// </summary>
+		/// <returns>Node of data</returns>
+		public T Peek()
         {
             if (Head == null)
                 throw new NullReferenceException("Stack is Clear!");
@@ -33,7 +47,11 @@ namespace Algorytms.Lists
                 return Head.Data;
         }
 
-        public override string ToString()
+		/// <summary>
+		/// Create string content from linked list
+		/// </summary>
+		/// <returns>string list "[node.data]->" </returns>
+		public override string ToString()
         {
             return base.ToString();
         }

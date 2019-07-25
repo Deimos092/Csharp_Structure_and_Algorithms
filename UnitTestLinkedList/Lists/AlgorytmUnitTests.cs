@@ -19,15 +19,21 @@ namespace Algorytms.Lists.Test
         [TestMethod()]
         public void LinkedListTest()
         {
-            LinkedList<int> myList = new LinkedList<int>();
+            LinkedList<int> myList = new LinkedList<int>();//Инициализация списка
 
             Random random = new Random();
             for (int i = 0; i < CountItems; i++)
-                myList.Add(i);
+                myList.Add(i);//Добавление элементов в список
 
             for (int i = 0; i < CountItems; i++)
                 if (random.Next(i - RndMax, i + RndMin) == i)
-                    myList.Remove(i);
+                    myList.Remove(i);//Удаление элементов
+
+			Console.WriteLine(myList[2].Data);//Использование индексации из базового класса
+
+			Console.WriteLine(myList.Find(x => x == 4));//Использование поиска из базового класса
+
+			Console.WriteLine(myList.ToString());//Вывод на консоль
         }
 
 		[TestMethod()]

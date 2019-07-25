@@ -5,56 +5,56 @@ using System.Collections;
 
 namespace Algorytms.Lists
 {
-    public class LinkedList<T> : AbstractList<T>, IEnumerable<T>
-    {
-        public LinkedList() : base() { }
+	public class LinkedList<T> : AbstractList<T>, IEnumerable<T>
+	{
+		public LinkedList() : base() { }
 
 		/// <summary>
 		/// Добавить данные в связный список.
 		/// </summary>
 		/// <param name="data"></param>
 		public void Add(T data)
-        {
+		{
 			//Create new node with new data
-            Node<T> NewNode = new Node<T>(data);
+			Node<T> NewNode = new Node<T>(data);
 
-            if (Head == null)// if head ref is null we add new node to head another add to tail
-            {
-                Head = NewNode;// add first node to head reference
-            }
-            else
-            {
+			if (Head == null)// if head ref is null we add new node to head another add to tail
+			{
+				Head = NewNode;// add first node to head reference
+			}
+			else
+			{
 				Tail.Next = NewNode;// Add new node to tail list
 			}
 			Tail = NewNode;// move reference to last node
 
-            Count++;
-        }
+			Count++;
+		}
 		/// <summary>
 		/// Remove data from linked list.
 		/// Execute removing first data in.
 		/// </summary>
 		/// <param name="data"> The data woud be delete </param>
 		public void Remove(T data)
-        {
-            // Dont foget to chek on null.
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
-            // Current observe node element.
-            Node<T> Current = Head;
-            // Previouse elemet before removing element.
-            Node<T> Previous = null;
+		{
+			// Dont foget to chek on null.
+			if (data == null)
+			{
+				throw new ArgumentNullException(nameof(data));
+			}
+			// Current observe node element.
+			Node<T> Current = Head;
+			// Previouse elemet before removing element.
+			Node<T> Previous = null;
 
 			// Walk all elements in linkedlist to end of it,
 			// or while not found current elemnt with data.
 			while (Current != null)
-            {
-                // Если данные обозреваемого элемента совпадают с удаляемыми данными,
-                // то выполняем удаление текущего элемента учитывая его положение в цепочке.
-                if (Current.Data.Equals(data))
-                {
+			{
+				// Если данные обозреваемого элемента совпадают с удаляемыми данными,
+				// то выполняем удаление текущего элемента учитывая его положение в цепочке.
+				if (Current.Data.Equals(data))
+				{
 
 					// Если элемент находится в середине или в конце списка,
 					// выкидываем текущий элемент из списка.
@@ -85,13 +85,13 @@ namespace Algorytms.Lists
 						}
 					}
 					Count--;
-                    break;
-                }
+					break;
+				}
 				// Переходим к следующему элементу списка.
 				Previous = Current;
-                Current = Current.Next;
-            }
-        }
+				Current = Current.Next;
+			}
+		}
 		/// <summary>
 		/// Вернуть перечислитель, выполняющий перебор всех элементов в связном списке.
 		/// </summary>
@@ -119,8 +119,8 @@ namespace Algorytms.Lists
 			return ((IEnumerable)this).GetEnumerator();
 		}
 		public override string ToString()
-        {
-            return base.ToString();
-        }
-    }
+		{
+			return base.ToString();
+		}
+	}
 }
