@@ -36,7 +36,7 @@ namespace Algorytms.Lists
 		}
 
 		/// <summary>
-		/// Add new node to back of List
+		/// Add new node to Back of List
 		/// </summary>
 		/// <param name="data">Data value</param>
 		public void AddLast(T data)

@@ -9,28 +9,26 @@ namespace Algorytms
 	class Program
 	{
 		static private int CountItems { get => 20; }
+		private static int RndMax { get => 10; }
+		private static int RndMin { get => -10; }
+
 
 		public static void CreateList(Random rnd)
 		{
-			LinkedList<int> myList = new LinkedList<int>();//Инициализация списка
-
+			AVLTree AVL = new AVLTree(0);
 
 			for (int i = 0; i < CountItems; i++)
-				myList.Add(i);//Добавление элементов в список
-
-			for (int i = 0; i < CountItems; i+= rnd.Next(3))
 			{
-				myList.Remove(i);//Удаление элементов
+				AVL.Inser(rnd.Next(RndMin * 10, RndMax * 10));
 			}
-			Console.WriteLine($"3й элемент по списку = {myList[2].ToString()}");//Использование индексации из базового класса
-			Console.WriteLine($"Найти элемент = 5 : {myList.Find(x => x == 5)}");//Использование поиска из базового класса
-			Console.WriteLine(myList.ToString());//Вывод на консоль
+
+			AVL.ConsolePrint();
 		}
 
 		static void Main(string[] args)
 		{
 			Random random = new Random();
-			for (int i = 0; i < 3; i++)
+			for (int i = 0; i < 10; i++)
 			{
 				CreateList(random);
 			}

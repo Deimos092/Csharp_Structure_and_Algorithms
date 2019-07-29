@@ -12,13 +12,24 @@ namespace Algorytms.Trees
 
 		TNode _root;
 
+		/// <summary>
+		/// Nullable constructor 
+		/// </summary>
 		public AVLTree() { }
 
+		/// <summary>
+		/// Constructor which initializate root with value
+		/// </summary>
+		/// <param name="data"></param>
 		public AVLTree(int data)
 		{
 			_root = new TNode(data);
 		}
 		
+		/// <summary>
+		/// Inser new Node with all rules of insert
+		/// </summary>
+		/// <param name="data"></param>
 		public virtual void Inser(int data)
 		{
 			TNode node = new TNode(data);
@@ -34,6 +45,12 @@ namespace Algorytms.Trees
 			}
 		}
 
+		/// <summary>
+		/// Go to end of branch and add new node
+		/// </summary>
+		/// <param name="currentNode"></param>
+		/// <param name="node"></param>
+		/// <returns></returns>
 		private TNode RecursiveInsert(TNode currentNode, TNode node)
 		{
 			if (currentNode == null)
@@ -54,6 +71,11 @@ namespace Algorytms.Trees
 			return currentNode;
 		}
 
+		/// <summary>
+		/// Balanced Tree when It's balance beyond of [-1;1]
+		/// </summary>
+		/// <param name="current"></param>
+		/// <returns></returns>
 		private TNode balance_tree(TNode current)
 		{
 			int b_factor = balance_factor(current);
@@ -61,33 +83,38 @@ namespace Algorytms.Trees
 			{
 				if (balance_factor(current.Left) > 0)
 				{
-					current = RotateLL(current);
+					current = RotateLL(current);//Left-Lfet rotate
 				}
 				else
 				{
-					current = RotateLR(current);
+					current = RotateLR(current);//Left-Right rotate
 				}
 			}
 			else if (b_factor < -1)
 			{
 				if (balance_factor(current.Right) > 0)
 				{
-					current = RotateRL(current);
+					current = RotateRL(current);//Right-Left rotate
 				}
 				else
 				{
-					current = RotateRR(current);
+					current = RotateRR(current);//Right-Right rotate
 				}
 			}
 			return current;
 		}
 
-		internal int max(int left, int right)
+		private int max(int left, int right)
 		{
 			return Math.Max(left, right);
 		}
 
-		internal int getHeight(TNode current)
+		/// <summary>
+		/// Get recursive value max of height each of branch current Node
+		/// </summary>
+		/// <param name="current"></param>
+		/// <returns></returns>
+		private int getHeight(TNode current)
 		{
 			int height = 0;
 			if (current != null)
@@ -100,39 +127,69 @@ namespace Algorytms.Trees
 			return height;
 		}
 
-		internal int balance_factor(TNode current)
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="current"></param>
+		/// <returns></returns>
+		private int balance_factor(TNode current)
 		{
 			int l = getHeight(current.Left);
 			int r = getHeight(current.Right);
 			int b_factor = l - r;
 			return b_factor;
 		}
-		internal TNode RotateLL(TNode parent)
+		/// <summary>
+		/// Simple Left-Left rotate
+		/// </summary>
+		/// <param name="parent"></param>
+		/// <returns></returns>
+		protected TNode RotateLL(TNode parent)
 		{
 			TNode child = parent.Left;
 			parent.Left = child.Right;
 			child.Right = parent;
 			return child;
 		}
-		internal TNode RotateLR(TNode parent)
+		/// <summary>
+		/// Complex rotate first of single Right rotating after then Call LL rotate
+		/// </summary>
+		/// <param name="parent"></param>
+		/// <returns></returns>
+		protected TNode RotateRL(TNode parent)
 		{
-			TNode child = parent.Left;
-			parent.Left = RotateRR(child);
-			return RotateLL(parent);
+			TNode child = parent.Right;
+			parent.Right = RotateLL(child);
+			return RotateRR(parent);
 		}
-		internal TNode RotateRR(TNode parent)
+
+		/// <summary>
+		/// Simple Right-Right rotate
+		/// </summary>
+		/// <param name="parent"></param>
+		/// <returns></returns>
+		protected TNode RotateRR(TNode parent)
 		{
 			TNode child = parent.Right;
 			parent.Right = child.Left;
 			child.Left = parent;
 			return child;
 		}
-		internal TNode RotateRL(TNode parent)
+		/// <summary>
+		/// Complex rotate first of single Left rotating after then Call RR rotate
+		/// </summary>
+		/// <param name="parent"></param>
+		/// <returns></returns>
+		protected TNode RotateLR(TNode parent)
 		{
-			TNode child = parent.Right;
-			parent.Right = RotateLL(child);
-			return RotateRR(parent);
+			TNode child = parent.Left;
+			parent.Left = RotateRR(child);
+			return RotateLL(parent);
 		}
+
+		/// <summary>
+		/// Print all Tree to Console window
+		/// </summary>
 		public void ConsolePrint()
 		{
 			_root.Print();

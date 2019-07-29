@@ -99,11 +99,11 @@ namespace Algorytms.Abstract
             Print(end, top, endPos);
         }
 
-        private static void Print(string s, int top, int left, int right = -1)
+        private static void Print(string value, int top, int left, int right = -1)
         {
             Console.SetCursorPosition(left, top);
-            if (right < 0) right = left + s.Length;
-            while (Console.CursorLeft < right) Console.Write(s);
+            if (right < 0) right = left + value.Length;
+            while (Console.CursorLeft < right) Console.Write(value);
         }
 
 		private static void SwapColors(NodeInfo nodeInfo)
