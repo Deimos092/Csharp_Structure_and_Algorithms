@@ -63,9 +63,10 @@ namespace Algorytms.Abstract
 					return Current;
 				Current = Current.Next;
 			}
-
 			return Head;
 		}
+
+		
 		public virtual void Clear()
 		{
 			Head = null;

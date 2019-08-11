@@ -3,7 +3,7 @@
     public class TNode
     {
 		//Enumerable Color for Red Black Tree
-		public enum Color
+		public enum ColorEnum
 		{
 			Red,
 			Black,
@@ -11,7 +11,7 @@
 		}
 		//------------------- Private Field ---------------------
         private int _data;
-		private TNode _left, _right, _parent;
+		public TNode Left, Right, Parent;
 		//-------------------------------------------------------
 
 		/// <summary>
@@ -32,26 +32,10 @@
             {
                 if (value.GetType() == typeof(int))
 					_data = value;
-            }
-        }
-		public TNode Parent
-		{
-			get => _parent;
-			set => _parent = value;
+			}
 		}
 
-        public TNode Left
-		{
-			get => _left;
-			set => _left = value;
-		}
-
-		public TNode Right
-		{
-			get => _right;
-			set => _right = value;
-		}
-		public Color Colors	{ get; set;	}
+		public ColorEnum Color	{ get; set;	}
 
 		/// <summary>
 		/// Reqursion inserting Node like BST tree method
@@ -66,11 +50,11 @@
             }
             else if (data < node.Data)
             {
-                Insertdata(ref node._left, data);
+                Insertdata(ref node.Left, data);
             }
             else
             {
-                Insertdata(ref node._right, data);
+                Insertdata(ref node.Right, data);
             }
         }
 

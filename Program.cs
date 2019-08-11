@@ -8,21 +8,20 @@ namespace Algorytms
 {
 	class Program
 	{
-		static private int CountItems { get => 20; }
+		static private int CountItems { get => 25; }
 		private static int RndMax { get => 10; }
 		private static int RndMin { get => -10; }
 
-
 		public static void CreateList(Random rnd)
 		{
-			AVLTree AVL = new AVLTree(0);
+			AVLTree aVL = new AVLTree();
 
 			for (int i = 0; i < CountItems; i++)
 			{
-				AVL.Inser(rnd.Next(RndMin * 10, RndMax * 10));
+				aVL.Inser(rnd.Next(RndMin,RndMax));
 			}
 
-			AVL.ConsolePrint();
+			aVL.ConsolePrint();
 		}
 
 		static void Main(string[] args)

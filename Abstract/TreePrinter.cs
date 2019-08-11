@@ -13,7 +13,7 @@ namespace Algorytms.Abstract
             public TNode Node;
             public string Text;
             public int StartPos;
-			public TNode.Color Color;
+			public TNode.ColorEnum Color;
             public int Size { get { return Text.Length; } }
             public int EndPos { get { return StartPos + Size; } set { StartPos = value - Size; } }
             public NodeInfo Parent, Left, Right;
@@ -32,7 +32,7 @@ namespace Algorytms.Abstract
 				{
 					Node = next,
 					Text = next.Data.ToString(" 0 "),
-					Color = root.Colors
+					Color = root.Color
 				};
 
                 if (level < last.Count)
@@ -83,7 +83,7 @@ namespace Algorytms.Abstract
 
         private static void Print(NodeInfo item, int top)
         {
-            SwapColors(item);
+            SwapColor(item);
 			Print(item.Text, top, item.StartPos);
 			Console.ResetColor();
 			if (item.Left != null)
@@ -106,14 +106,14 @@ namespace Algorytms.Abstract
             while (Console.CursorLeft < right) Console.Write(value);
         }
 
-		private static void SwapColors(NodeInfo nodeInfo)
+		private static void SwapColor(NodeInfo nodeInfo)
 		{
-			if (nodeInfo.Color == TNode.Color.Black)
+			if (nodeInfo.Color == TNode.ColorEnum.Black)
 			{
 				Console.ForegroundColor = ConsoleColor.White;
 				Console.BackgroundColor = ConsoleColor.DarkGray;
 			}
-			else if (nodeInfo.Color == TNode.Color.Red)
+			else if (nodeInfo.Color == TNode.ColorEnum.Red)
 			{
 				Console.ForegroundColor = ConsoleColor.Black;
 				Console.BackgroundColor = ConsoleColor.Red;

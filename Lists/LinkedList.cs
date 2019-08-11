@@ -92,6 +92,7 @@ namespace Algorytms.Lists
 				Current = Current.Next;
 			}
 		}
+
 		/// <summary>
 		/// Вернуть перечислитель, выполняющий перебор всех элементов в связном списке.
 		/// </summary>

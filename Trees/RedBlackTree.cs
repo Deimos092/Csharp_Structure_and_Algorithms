@@ -7,30 +7,19 @@ using Algorytms.Abstract;
 
 namespace Algorytms.Trees
 {
-	class RedBlackTree : AVLTree
+	public class RedBlackTree : AVLTree
 	{
 		TNode root;
 
 		public RedBlackTree()
 		{
-			root = null;
+
 		}
 
-		public RedBlackTree(int data)
+		public RedBlackTree(int data, TNode.ColorEnum color = TNode.ColorEnum.Red)
 		{
 			root = new TNode(data);
-			root.Colors = TNode.Color.Red;
-		}
-
-		public RedBlackTree(TNode.Color color)
-		{
-			root.Colors = color;
-		}
-
-		public RedBlackTree(int data, TNode.Color color = TNode.Color.Red)
-		{
-			root = new TNode(data);
-			root.Colors = color;
+			root.Color = color;
 		}
 
 		public override void Inser(int data)
@@ -39,7 +28,7 @@ namespace Algorytms.Trees
 			if (root == null)
 			{
 				root = newNode;
-				root.Colors = TNode.Color.Black;
+				root.Color = TNode.ColorEnum.Black;
 				return;
 			}
 			TNode Anode = null;
@@ -73,23 +62,23 @@ namespace Algorytms.Trees
 			}
 			newNode.Left = null;
 			newNode.Right = null;
-			newNode.Colors = TNode.Color.Red;//colour the new node red
+			newNode.Color = TNode.ColorEnum.Red;//colour the new node red
 			InsertFixUp(newNode);//call method to check for violations and fix
 		}
 		private void InsertFixUp(TNode node)
 		{
 			//Checks Red-Black Tree properties
-			while (node != root && node.Parent.Colors == TNode.Color.Red)
+			while (node != root && node.Parent.Color == TNode.ColorEnum.Red)
 			{
 				/*We have a violation*/
 				if (node.Parent == node.Parent.Parent.Left)
 				{
 					TNode Anode = node.Parent.Parent.Right;
-					if (Anode != null && Anode.Colors == TNode.Color.Red)//Case 1: uncle is red
+					if (Anode != null && Anode.Color == TNode.ColorEnum.Red)//Case 1: uncle is red
 					{
-						node.Parent.Colors = TNode.Color.Black;
-						Anode.Colors = TNode.Color.Black;
-						node.Parent.Parent.Colors = TNode.Color.Red;
+						node.Parent.Color = TNode.ColorEnum.Black;
+						Anode.Color = TNode.ColorEnum.Black;
+						node.Parent.Parent.Color = TNode.ColorEnum.Red;
 						node = node.Parent.Parent;
 					}
 					else //Case 2: uncle is black
@@ -97,12 +86,12 @@ namespace Algorytms.Trees
 						if (node == node.Parent.Right)
 						{
 							node = node.Parent;
-							RotateLR(node);
+							LeftRotate(node);
 						}
 						//Case 3: recolour & rotate
-						node.Parent.Colors = TNode.Color.Black;
-						node.Parent.Parent.Colors = TNode.Color.Red;
-						RotateRR(node.Parent.Parent);
+						node.Parent.Color = TNode.ColorEnum.Black;
+						node.Parent.Parent.Color = TNode.ColorEnum.Red;
+						RightRotate(node.Parent.Parent);
 					}
 
 				}
@@ -112,11 +101,11 @@ namespace Algorytms.Trees
 					TNode Bnode = null;
 
 					Bnode = node.Parent.Parent.Left;
-					if (Bnode != null && Bnode.Colors == TNode.Color.Black)//Case 1
+					if (Bnode != null && Bnode.Color == TNode.ColorEnum.Black)//Case 1
 					{
-						node.Parent.Colors = TNode.Color.Red;
-						Bnode.Colors = TNode.Color.Red;
-						node.Parent.Parent.Colors = TNode.Color.Black;
+						node.Parent.Color = TNode.ColorEnum.Red;
+						Bnode.Color = TNode.ColorEnum.Red;
+						node.Parent.Parent.Color = TNode.ColorEnum.Black;
 						node = node.Parent.Parent;
 					}
 					else //Case 2
@@ -124,16 +113,89 @@ namespace Algorytms.Trees
 						if (node == node.Parent.Left)
 						{
 							node = node.Parent;
-							RotateRR(node);
+							RightRotate(node);
 						}
 						//Case 3: recolour & rotate
-						node.Parent.Colors = TNode.Color.Black;
-						node.Parent.Parent.Colors = TNode.Color.Red;
-						RotateLR(node.Parent.Parent);
+						node.Parent.Color = TNode.ColorEnum.Black;
+						node.Parent.Parent.Color = TNode.ColorEnum.Red;
+						LeftRotate(node.Parent.Parent);
 					}
 
 				}
-				root.Colors = TNode.Color.Black;//re-colour the root black as necessary
+				root.Color = TNode.ColorEnum.Black;//re-colour the root black as necessary
+			}
+		}
+		/// <summary>
+		/// Left Rotate
+		/// </summary>
+		/// <param name="X"></param>
+		/// <returns>void</returns>
+		private void LeftRotate(TNode X)
+		{
+			TNode Y = X.Right; // set Y
+			X.Right = Y.Left;//turn Y's left subtree into X's right subtree
+			if (Y.Left != null)
+			{
+				Y.Left.Parent = X;
+			}
+			if (Y != null)
+			{
+				Y.Parent = X.Parent;//link X's parent to Y
+			}
+			if (X.Parent == null)
+			{
+				root = Y;
+			}
+			if (X == X.Parent.Left)
+			{
+				X.Parent.Left = Y;
+			}
+			else
+			{
+				X.Parent.Right = Y;
+			}
+			Y.Left = X; //put X on Y's left
+			if (X != null)
+			{
+				X.Parent = Y;
+			}
+
+		}
+		/// <summary>
+		/// Rotate Right
+		/// </summary>
+		/// <param name="Y"></param>
+		/// <returns>void</returns>
+		private void RightRotate(TNode Y)
+		{
+			// right rotate is simply mirror code from left rotate
+			TNode X = Y.Left;
+			Y.Left = X.Right;
+			if (X.Right != null)
+			{
+				X.Right.Parent = Y;
+			}
+			if (X != null)
+			{
+				X.Parent = Y.Parent;
+			}
+			if (Y.Parent == null)
+			{
+				root = X;
+			}
+			if (Y == Y.Parent.Right)
+			{
+				Y.Parent.Right = X;
+			}
+			if (Y == Y.Parent.Left)
+			{
+				Y.Parent.Left = X;
+			}
+
+			X.Right = Y;//put Y on X's right
+			if (Y != null)
+			{
+				Y.Parent = X;
 			}
 		}
 		public new void ConsolePrint()

@@ -13,7 +13,7 @@ namespace Algorytms.Trees
         public BinarySearchTree()
         {
             root = null;
-			root.Colors = TNode.Color.None;
+			root.Color = TNode.ColorEnum.None;
         }
 
 		/// <summary>
@@ -23,7 +23,7 @@ namespace Algorytms.Trees
         public BinarySearchTree(int data)
         {
             root = new TNode(data);
-			root.Colors = TNode.Color.None;
+			root.Color = TNode.ColorEnum.None;
         }
 
 		/// <summary>

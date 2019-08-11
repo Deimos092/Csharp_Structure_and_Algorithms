@@ -36,11 +36,11 @@ namespace Algorytms.Trees
 			if(_root == null)
 			{
 				_root = node;
-				_root.Colors = TNode.Color.None;
+				_root.Color = TNode.ColorEnum.None;
 			}
 			else
 			{
-				_root.Colors = TNode.Color.None;
+				_root.Color = TNode.ColorEnum.None;
 				_root = RecursiveInsert(_root, node);
 			}
 		}
