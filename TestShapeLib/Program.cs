@@ -1,5 +1,6 @@
 ﻿using System;
 using ShapeCalculater.Shapes;
+using ShapeCalculater.Core.Abstract;
 
 namespace TestShapeLib
 {
@@ -9,7 +10,10 @@ namespace TestShapeLib
 		{
 
 			Triangle triangle = new Triangle(4, 3, 5);
-			Console.WriteLine(triangle.ToString());
+
+			Shape shape = triangle;
+			shape.CalcArea(5, 5, 7);
+			Console.WriteLine(shape.Area);
 
 			Console.ReadLine();
 		}
