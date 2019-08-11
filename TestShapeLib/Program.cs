@@ -10,7 +10,6 @@ namespace TestShapeLib
 
 			Triangle triangle = new Triangle(4, 3, 5);
 			Console.WriteLine(triangle.ToString());
-			Console.WriteLine($"Is this Triangle : {triangle.IsThisTriangle}");
 
 			Console.ReadLine();
 		}
