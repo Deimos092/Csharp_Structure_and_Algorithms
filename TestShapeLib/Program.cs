@@ -10,10 +10,10 @@ namespace TestShapeLib
 		{
 
 			Triangle triangle = new Triangle(4, 3, 5);
-
-			Shape shape = triangle;
-			shape.CalcArea(5, 5, 7);
-			Console.WriteLine(shape.Area);
+			Console.WriteLine(triangle.ToString());
+			//Shape shape = triangle;
+			//shape.CalcArea(4, 3, 5);
+			//Console.WriteLine(shape.Area);
 
 			Console.ReadLine();
 		}
